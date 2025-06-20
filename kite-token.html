@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Token Copy</title>
+</head>
+<body>
+  <h2>🔁 Processing Token...</h2>
+  <script>
+    function getParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    const token = getParam("request_token");
+
+    if (token) {
+      navigator.clipboard.writeText(token).then(function() {
+        document.body.innerHTML = "<h2>✅ Token copied to clipboard!</h2><p>You can now paste it in Excel (Ctrl + V).</p>";
+      }, function(err) {
+        document.body.innerHTML = "<h2>❌ Failed to copy.</h2><p>" + err + "</p>";
+      });
+    } else {
+      document.body.innerHTML = "<h2>⚠️ Request token not found in URL.</h2>";
+    }
+  </script>
+</body>
+</html>
